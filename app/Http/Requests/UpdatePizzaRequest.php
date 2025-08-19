@@ -10,11 +10,12 @@ use Log;
 class UpdatePizzaRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Assume that user is logged in and authorised to make changes
+     *
+     * @return bool
      */
     public function authorize(): bool
     {
-        // Assume that user is logged in and authorised to make changes
         return true;
     }
 

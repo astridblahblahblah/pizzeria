@@ -13,12 +13,12 @@ class NotifyPizzaStatusChange implements ShouldQueue, ShouldBeUnique
 {
     use Queueable;
 
-    // Maybe set to high priority queue because hungry people get impatient quickly
+    // Could be set to high priority queue because hungry people get impatient quickly
 
     /**
      * @var \App\Models\Pizza
      */
-    protected $pizza;
+    protected Pizza $pizza;
 
     /**
      * Create a new job instance.
@@ -60,7 +60,7 @@ class NotifyPizzaStatusChange implements ShouldQueue, ShouldBeUnique
             'X-Signature' => $signature,
         ])->post(env('WEBHOOK_URL_STATUS_UPDATES'), $payload);
 
-        // Should be checked in Horizon but this should suffice
+        // Better check in something like Horizon but this should suffice
         Log::info('Pizza status update sent to website');
         Log::info($payload);
     }

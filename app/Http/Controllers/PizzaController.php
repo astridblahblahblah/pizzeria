@@ -22,6 +22,8 @@ class PizzaController
 
     /**
      * Show the update form
+     *
+     * @param Pizza $pizza
      */
     public function edit(Pizza $pizza)
     {
@@ -30,6 +32,10 @@ class PizzaController
 
     /**
      * Handle the update
+     *
+     * @param UpdatePizzaRequest $request
+     * @param Pizza $pizza
+     * @return RedirectResponse
      */
     public function update(UpdatePizzaRequest $request, Pizza $pizza): RedirectResponse
     {
