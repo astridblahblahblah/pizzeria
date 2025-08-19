@@ -2,6 +2,9 @@ import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 
+import './bootstrap'
+import './assets/css/app.css'
+
 import Pizzas from './pages/pizzas/index.vue';
 import PizzaEdit from './pages/pizzas/edit.vue';
 

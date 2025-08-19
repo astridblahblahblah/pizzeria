@@ -2,10 +2,10 @@
     <div>
         <h1 class="text-3xl font-bold mb-6">Edit Pizza</h1>
 
-        <div class="form-control mb-4">
-            <span v-if="message" class="text-red-500 text-sm mt-1">
-                {{ message }}
-            </span>
+        <div v-if="message"
+             class="bg-green-500 text-white px-4 py-2 rounded shadow mb-4 transition-opacity duration-500"
+             :class="{ 'opacity-0': !message }">
+            {{ message }}
         </div>
 
         <div v-if="pizza && pizza.status !== 'Done'">
@@ -114,6 +114,9 @@ async function updatePizza() {
             form.status = pizza.value.status
 
             message.value = 'Pizza updated successfully.'
+            setTimeout(() => {
+                message.value = ''
+            }, 2000)
         }
     } catch (e) {
         console.error('Failed to update pizza', e)

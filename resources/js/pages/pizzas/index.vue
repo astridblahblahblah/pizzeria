@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-base-200 text-base-content" data-theme="luxury">
+    <div class="bg-base-200 text-base-content">
         <h1 class="text-3xl font-bold mb-6">Pizzas</h1>
 
         <div v-if="loading">Loading pizzas...</div>
