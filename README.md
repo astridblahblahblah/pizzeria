@@ -21,7 +21,7 @@ via a webhook. The webhook will have in its payload:
 ## Assumptions
 
 - For the purpose of this demo, going into the pizza list already assumes the pizzaiolo has already logged in successfully and is authorised to view and update pizzas.
-- Pizza model is very simple and only the status can be updated.
+- Pizza model is very simple and only the status can be updated. It can be an abbreviated copy of the original POS that the app maintains locally or the actual pizzas table belonging to the original POS.
 - Customer-facing website accepts webhooks and can verify the signatures to facilitate processing of these hooks.
 - Job dispatch just logs the details of the hook sent, Horizon was not configured in this demo 
 
