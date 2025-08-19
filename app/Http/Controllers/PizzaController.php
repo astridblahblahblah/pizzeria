@@ -2,20 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePizzaRequest;
 use App\Models\Pizza;
 use App\Models\Enums\PizzaStatus;
 use App\Jobs\NotifyPizzaStatusChange;
+use Illuminate\Http\RedirectResponse;
 
-class PizzaController extends Controller
+class PizzaController
 {
+
     /**
-     * To keep things simple, we leave status updates here as this is the only item that can be updated anyway
+     * Show a list of pizzas
      */
-    public function update(Request $request, Pizza $pizza, string $status): Resource
+    public function index()
     {
-        $pizza->status = PizzaStatus::tryFrom($status);
-        $pizza->save();
+        $pizzas = Pizza::all();
+        return view('pizzas.index', compact('pizzas'));
+    }
+
+    /**
+     * Show the update form
+     */
+    public function edit(Pizza $pizza)
+    {
+        return view('pizzas.edit', compact('pizza'));
+    }
+
+    /**
+     * Handle the update
+     */
+    public function update(UpdatePizzaRequest $request, Pizza $pizza): RedirectResponse
+    {
+        $pizza->update($request->validated());
 
         NotifyPizzaStatusChange::dispatch($pizza);
+
+        return redirect()->route('pizzas.edit', $pizza)->with('success', 'Pizza updated successfully!');
     }
 }

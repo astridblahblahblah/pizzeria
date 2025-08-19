@@ -2,11 +2,11 @@
 
 namespace App\Models\Enums;
 
-enum PizzaStatus
+enum PizzaStatus: string
 {
-    case Prepping;
-    case Baking;
-    case Done;
+    case Prepping = 'Prepping';
+    case Baking = 'Baking';
+    case Done = 'Done';
 
     /**
      * Allowed status transitions
@@ -18,7 +18,8 @@ enum PizzaStatus
         return match ($this) {
             self::Prepping => [self::Baking],
             self::Baking => [self::Done],
-            default => [],
+            self::Done => [],
+            default => [self::Prepping],
         };
     }
 }

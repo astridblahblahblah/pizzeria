@@ -19,6 +19,7 @@ class PizzaFactory extends Factory
     {
         return [
             'status' => fake()->randomElement(PizzaStatus::cases()),
+            'name' => fake()->randomElement(['Pepperoni', 'Margarita',])
         ];
     }
 

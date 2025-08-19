@@ -18,6 +18,7 @@ class Pizza extends Model
      */
     protected $fillable = [
         'status',
+        'name',
     ];
 
     /**
