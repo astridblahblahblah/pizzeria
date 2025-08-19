@@ -18,7 +18,7 @@ COPY composer.json ./
 RUN mkdir -p database/seeders database/factories
 RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-# Copy the rest of the app2
+# Copy the rest of the app
 COPY . .
 
 # Regenerate optimized autoload without running artisan scripts

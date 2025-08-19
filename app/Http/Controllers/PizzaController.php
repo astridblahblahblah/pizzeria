@@ -7,27 +7,26 @@ use App\Models\Pizza;
 use App\Models\Enums\PizzaStatus;
 use App\Jobs\NotifyPizzaStatusChange;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class PizzaController
 {
-
     /**
      * Show a list of pizzas
      */
-    public function index()
+    public function index(): JsonResource
     {
-        $pizzas = Pizza::all();
-        return view('pizzas.index', compact('pizzas'));
+        return JsonResource::collection(Pizza::all());
     }
 
     /**
-     * Show the update form
-     *
-     * @param Pizza $pizza
+     * Show a pizza
      */
-    public function edit(Pizza $pizza)
+    public function show(Pizza $pizza): JsonResource
     {
-        return view('pizzas.edit', compact('pizza'));
+        $resource = $pizza->toArray();
+        $resource['status_transitions'] = $pizza->status->transitions();
+        return new JsonResource($resource);
     }
 
     /**
@@ -37,12 +36,12 @@ class PizzaController
      * @param Pizza $pizza
      * @return RedirectResponse
      */
-    public function update(UpdatePizzaRequest $request, Pizza $pizza): RedirectResponse
+    public function update(UpdatePizzaRequest $request, Pizza $pizza): JsonResource
     {
         $pizza->update($request->validated());
 
         NotifyPizzaStatusChange::dispatch($pizza);
 
-        return redirect()->route('pizzas.edit', $pizza)->with('success', 'Pizza updated successfully!');
+        return new JsonResource($pizza->refresh());
     }
 }
