@@ -25,8 +25,6 @@ class UpdatePizzaRequest extends FormRequest
      */
     public function rules(): array
     {
-        Log::info($this->pizza->status->transitions());
-
         return [
             'status' => [
                 'required',

@@ -6,9 +6,13 @@
     <title>{{ $title ?? 'The 2-Pizza Company' }}</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto py-10">
-        @yield('content') <!-- use @section('content') in your views -->
-    </div>
+<body class="bg-base-200 text-base-content" data-theme="luxury">
+    <main class="container mx-auto py-10">
+        @yield('content')
+    </main>
+
+    <footer class="footer footer-center p-10 bg-primary text-primary-content">
+        <p>© 2025 The 2-Pizza Company. All rights reserved.</p>
+    </footer>
 </body>
 </html>
